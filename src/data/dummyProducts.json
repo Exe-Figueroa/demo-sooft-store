@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Mouse",
+    "price": 25.99,
+    "imageUrl": "https://i.pinimg.com/736x/25/b5/30/25b530135b0c1327f8155f184420ad11.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Mechanical Keyboard",
+    "price": 89.99,
+    "imageUrl": "https://i.pinimg.com/564x/59/f5/aa/59f5aa12bdbb8b49b7cf2e84c583b3e6.jpg"
+  },
+  {
+    "id": 3,
+    "name": "USB-C Hub",
+    "price": 35.50,
+    "imageUrl": "https://i.pinimg.com/564x/a7/4c/b4/a74cb49658ae0d4a076e5eac88a9e887.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Gaming Headset",
+    "price": 79.95,
+    "imageUrl": "https://i.pinimg.com/564x/32/de/82/32de827d0fb2cecd793e6200302961d5.jpg"
+  },
+  {
+    "id": 5,
+    "name": "External SSD 1TB",
+    "price": 129.99,
+    "imageUrl": "https://i.pinimg.com/564x/df/0c/05/df0c052e658bc90fe6d2e25f6e69c0b9.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Portable Charger",
+    "price": 45.00,
+    "imageUrl": "https://i.pinimg.com/564x/2f/b7/1f/2fb71f132748773724e1ca5d1c20497d.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Smartwatch",
+    "price": 199.99,
+    "imageUrl": "https://i.pinimg.com/564x/ee/8f/fa/ee8ffa1b14212ff6676bbd414fffa468.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Bluetooth Speaker",
+    "price": 59.99,
+    "imageUrl": "https://i.pinimg.com/564x/bd/ab/c4/bdabc47e32d0770253c1899894e30648.jpg"
+  },
+  {
+    "id": 9,
+    "name": "HD Webcam",
+    "price": 49.95,
+    "imageUrl": "https://i.pinimg.com/564x/b7/d3/9c/b7d39c5c6a3e7f81ad6ebbb9c5cb2f8d.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Noise Cancelling Headphones",
+    "price": 249.99,
+    "imageUrl": "https://i.pinimg.com/564x/75/fc/34/75fc3420f262d07b798d2fc488d2da0e.jpg"
+  }
+]
