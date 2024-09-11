@@ -1,4 +1,22 @@
+import { useContext } from "react";
+import { DataProvider } from "../../context/DataContextProvider";
+
+import { useState } from "react";
+
 export const ProductCard = ({ product }) => {
+  const { addNewProduct } = useContext(DataProvider);
+
+  const [productState, setProductState] = useState({ ...product, qty: 0 });
+  const handleQty = (e) => {
+    setProductState((prevData) => ({ ...prevData, qty: e.target.value }));
+  };
+
+  const handleAddNewProduct = () => {
+    if (productState.qty > 0) {
+      addNewProduct(productState);
+    }
+  };
+
   return (
     <section className="w-full max-w-[350px] mx-auto max-h-[400px] shadow-md rounded-lg flex flex-col items-start justify-between pb-7">
       <img
@@ -14,6 +32,7 @@ export const ProductCard = ({ product }) => {
       </div>
       <div className="w-full px-2 flex items-center justify-start gap-2">
         <select
+          onChange={handleQty}
           name="qty"
           className="w-16 px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-300"
         >
@@ -29,7 +48,10 @@ export const ProductCard = ({ product }) => {
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
-        <button className="px-4 py-2 bg-black text-sm text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:ring-offset-1 ">
+        <button
+          className="px-4 py-2 bg-black text-sm text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:ring-offset-1 "
+          onClick={handleAddNewProduct}
+        >
           Añadir al carrito
         </button>
       </div>
