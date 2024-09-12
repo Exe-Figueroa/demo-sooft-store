@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./Home";
 import { DataContextProvider } from "../context/DataContextProvider";
+import { ScrollTopButton } from "../components/ScrollTopButton";
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
           <Route path="/order" element={<h1>order</h1>} />
         </Routes>
       </HashRouter>
+      <ScrollTopButton/>
     </DataContextProvider>
   );
 };
