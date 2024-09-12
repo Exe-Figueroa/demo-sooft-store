@@ -4,7 +4,7 @@ import { DataProvider } from "../../context/DataContextProvider";
 import { useState } from "react";
 
 export const ProductCard = ({ product }) => {
-  const { addNewProduct } = useContext(DataProvider);
+  const { upsertProduct } = useContext(DataProvider);
 
   const [productState, setProductState] = useState({ ...product, qty: 0 });
   const handleQty = (e) => {
@@ -12,9 +12,7 @@ export const ProductCard = ({ product }) => {
   };
 
   const handleAddNewProduct = () => {
-    if (productState.qty > 0) {
-      addNewProduct(productState);
-    }
+    upsertProduct(productState);
   };
 
   return (
