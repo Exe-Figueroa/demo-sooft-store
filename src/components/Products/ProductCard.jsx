@@ -7,9 +7,9 @@ import { Button } from "../elements/Button";
 export const ProductCard = ({ product }) => {
   const { upsertProduct } = useContext(DataProvider);
 
-  const [productState, setProductState] = useState({ ...product, qty: 0 });
+  const [productState, setProductState] = useState({ ...product, qty: 1 });
   const handleQty = (e) => {
-    setProductState((prevData) => ({ ...prevData, qty: e.target.value }));
+    setProductState((prevData) => ({ ...prevData, qty: Number(e.target.value) }));
   };
 
   const handleAddNewProduct = () => {
@@ -34,17 +34,18 @@ export const ProductCard = ({ product }) => {
           onChange={handleQty}
           name="qty"
           className="w-16 px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-300"
+          defaultValue={1}
         >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
         </select>
         <Button
           className="px-4 py-2 bg-black text-sm text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:ring-offset-1 "

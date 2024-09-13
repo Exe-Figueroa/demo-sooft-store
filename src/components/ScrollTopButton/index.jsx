@@ -23,7 +23,7 @@ export const ScrollTopButton = () => {
   return (
     <button
     onClick={scrollToTop}
-      className={`fixed right-3 bottom-8 transition z-50 bg-slate-100 flex items-center justify-center rounded-full p-0.5 shadow-sm ${
+      className={`fixed right-3 bottom-8 transition z-30 bg-slate-100 flex items-center justify-center rounded-full p-0.5 shadow-sm ${
         isVisible ? "scale-100" : "scale-0"
       }`}
     >

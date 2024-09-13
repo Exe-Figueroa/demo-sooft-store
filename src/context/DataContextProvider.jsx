@@ -10,10 +10,17 @@ export const DataContextProvider = ({ children }) => {
     setOrder([]);
   };
 
-  const updateProductByIndex = (newProduct, index) => {
-    const firstPart = order.slice(0, index);
-    const secondPart = order.slice(index + 1, order.length);
-    setOrder([...firstPart, newProduct, ...secondPart]);
+  const updateProductById = (newProduct) => {
+    const newOrderUpdated = order.map((product) => {
+      if (product.id === newProduct.id) {
+        return newProduct.qty > 0 && newProduct.qty <= 10
+          ? newProduct
+          : product;
+      } else {
+        return product;
+      }
+    });
+    setOrder(newOrderUpdated);
   };
 
   const addNewProduct = (newProduct) => {
@@ -21,16 +28,16 @@ export const DataContextProvider = ({ children }) => {
   };
 
   const upsertProduct = (newProduct) => {
-    const indexProduct = order.findIndex((p) => p?.id === newProduct.id);
-    if (indexProduct >= 0) {
-      updateProductByIndex(newProduct, indexProduct);
+    const productExists = order.some((product) => product.id === newProduct.id);
+    if (productExists) {
+      updateProductById(newProduct);
     } else if (newProduct.qty > 0) {
       addNewProduct(newProduct);
     }
   };
 
-  const deleteProductByIndex = (productIndex) => {
-    const newOrder = order.filter((_, index) => index !== productIndex);
+  const deleteProductById = (productId) => {
+    const newOrder = order.filter((product) => product.id !== productId);
     setOrder(newOrder);
   };
 
@@ -43,8 +50,8 @@ export const DataContextProvider = ({ children }) => {
     cleanOrder,
     addNewProduct,
     upsertProduct,
-    updateProductByIndex,
-    deleteProductByIndex,
+    updateProductById,
+    deleteProductById,
     handleSeeOrderModal,
     seeOrderModal,
   };
