@@ -4,6 +4,8 @@ export const DataProvider = createContext();
 
 export const DataContextProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
+  const [seeOrderModal, setSeeOrderModal] = useState(false);
+
   const cleanOrder = () => {
     setOrder([]);
   };
@@ -20,14 +22,7 @@ export const DataContextProvider = ({ children }) => {
 
   const upsertProduct = (newProduct) => {
     const indexProduct = order.findIndex((p) => p?.id === newProduct.id);
-
-    if (newProduct.qty == 0 && indexProduct >= 0) {
-      if (order.length === 1) {
-        cleanOrder();
-      } else {
-        deleteProductByIndex(indexProduct);
-      }
-    } else if (indexProduct >= 0) {
+    if (indexProduct >= 0) {
       updateProductByIndex(newProduct, indexProduct);
     } else if (newProduct.qty > 0) {
       addNewProduct(newProduct);
@@ -39,12 +34,19 @@ export const DataContextProvider = ({ children }) => {
     setOrder(newOrder);
   };
 
+  const handleSeeOrderModal = (shouldBeVisible) => {
+    setSeeOrderModal(shouldBeVisible);
+  };
+
   const obj = {
     order,
     cleanOrder,
     addNewProduct,
     upsertProduct,
     updateProductByIndex,
+    deleteProductByIndex,
+    handleSeeOrderModal,
+    seeOrderModal,
   };
   return <DataProvider.Provider value={obj}>{children}</DataProvider.Provider>;
 };
