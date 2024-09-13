@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { DataProvider } from "../../context/DataContextProvider";
 
 import { useState } from "react";
+import { Button } from "../elements/Button";
 
 export const ProductCard = ({ product }) => {
   const { upsertProduct } = useContext(DataProvider);
@@ -34,7 +35,6 @@ export const ProductCard = ({ product }) => {
           name="qty"
           className="w-16 px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-300"
         >
-          <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -46,12 +46,12 @@ export const ProductCard = ({ product }) => {
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
-        <button
+        <Button
           className="px-4 py-2 bg-black text-sm text-white rounded-md hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:ring-offset-1 "
           onClick={handleAddNewProduct}
         >
           Añadir al carrito
-        </button>
+        </Button>
       </div>
     </section>
   );
