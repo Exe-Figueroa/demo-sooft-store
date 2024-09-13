@@ -1,12 +1,20 @@
 import { OrderProduct } from "./OrderProduct";
 
-export const OrderProductsContainer = () => {
+export const OrderProductsContainer = ({
+  order,
+  updateProductById,
+  deleteProductById,
+}) => {
   return (
     <div className="flex-grow overflow-y-auto p-4">
-      <OrderProduct />
-      <OrderProduct />
-      <OrderProduct />
-      <OrderProduct />
+      {order.map((product) => (
+        <OrderProduct
+          key={product.id}
+          product={product}
+          updateProductById={updateProductById}
+          deleteProductById={deleteProductById}
+        />
+      ))}
     </div>
   );
 };
