@@ -6,13 +6,13 @@ import { OrderModal } from "../components/OrderModal";
 import { ProductsContainer } from "../components/Products";
 import { DataProvider } from "../context/DataContextProvider";
 import { ShoppingCart } from "../assets/icons/ShoppingCart";
+import { Layout } from "../components/Layout";
 
 export const Home = () => {
   const { order, handleSeeOrderModal } = useContext(DataProvider);
   return (
-    <div className="flex flex-col items-center gap-4">
+    <Layout>
       <Header>
-        
         <Button
           className="flex items-center justify-center relative"
           onClick={() => handleSeeOrderModal(true)}
@@ -28,6 +28,6 @@ export const Home = () => {
         <ProductsContainer />
       </main>
       <Footer />
-    </div>
+    </Layout>
   );
 };
