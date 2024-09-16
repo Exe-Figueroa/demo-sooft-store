@@ -16,11 +16,11 @@ export const ProductItem = ({product}) => {
         </div>
       </div>
       <div className="space-x-2 flex">
-        <Button className="text-blue-600 hover:text-blue-700 border-blue-600 md:text-white md:bg-blue-600 md:hover:bg-blue-700 p-2 outline outline-1 rounded-md flex items-center justify-center gap-1">
+        <Button className="text-blue-600 hover:text-blue-700 border-blue-600 transition md:hover:bg-blue-600 duration-300 md:hover:text-white p-2 outline outline-1 rounded-md flex items-center justify-center gap-1">
           <Pencil className="h-4 w-4 stroke-[2px]" />
           <span className="hidden md:block">Editar</span>
         </Button>
-        <Button className="text-red-600 hover:text-red-700 border-red-600 p-2 outline outline-1 rounded-md flex items-center justify-center gap-1">
+        <Button className="text-red-600 hover:text-red-700 border-red-600 transition md:hover:bg-red-600 duration-300 md:hover:text-white p-2 outline outline-1 rounded-md flex items-center justify-center gap-1">
           <Trash className="h-4 w-4 stroke-[2px]" />
           <span className="hidden md:block">Eliminar</span>
         </Button>
