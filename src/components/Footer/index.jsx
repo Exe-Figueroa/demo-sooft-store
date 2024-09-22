@@ -9,13 +9,13 @@ export const Footer = () => {
         <At className="text-white"/>
         SooftStoreMDZ@gmail.com
       </a>
-      <a href="https://wa.me/+5492617087572?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+      <a href="https://wa.me/+5492617155545?text=Hola,%20quiero%20más%20información" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
         <WhatsApp className="text-white"/>
-        + 54 9 261 708-7572
+        +54 261 715-5545
       </a>
-      <a href="https://www.instagram.com/sooft.store/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+      <a href="https://www.instagram.com/tienda.sooftstore/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
         <Instagram className="text-white"/>
-        sooft.store
+        Tienda.sooftstore
       </a>
     </footer>
   );
