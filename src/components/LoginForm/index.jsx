@@ -7,11 +7,14 @@ import { AuthService } from "../../auth-management/application/auth.service";
 import { AuthSupabaseRepository } from "../../auth-management/infraestructure/auth.repository";
 import { supabaseClient } from "../../libs/supabaseConnection";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { DataProvider } from "../../context/DataContextProvider";
 
 const authService = new AuthService(new AuthSupabaseRepository(supabaseClient));
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const { newUserSession } = useContext(DataProvider);
   const initialValues = { email: "", password: "" };
   const { handleNotify } = useNotification({
     start: "Iniciando sesión",
@@ -19,10 +22,11 @@ export const LoginForm = () => {
     error: "Error al iniciar sesión. Por favor vuelva a intentarlo más tarde",
   });
   const onSubmit = async () => {
-    await authService.signIn(formData.email, formData.password);
+    const session = await authService.signIn(formData.email, formData.password);
+    newUserSession(session);
   };
   const onFinish = () => {
-    return navigate("/admin")
+    return navigate("/admin");
   };
   const { enabledSubmit, formData, handleChange, handleSubmit } = useForm({
     initialValues,
@@ -43,6 +47,8 @@ export const LoginForm = () => {
             type="email"
             name="email"
             placeholder="Email de usuario"
+            autoComplete="off"
+            required
             value={formData.email ?? ""}
             className="pl-10 py-2 pr-4 w-full border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out outline-none border border-solid"
             onChange={({ target: { value } }) =>
@@ -59,6 +65,8 @@ export const LoginForm = () => {
             type="password"
             name="password"
             placeholder="Contraseña"
+            autoComplete="off"
+            required
             value={formData.password ?? ""}
             className="pl-10 py-2 pr-4 w-full border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out outline-none border border-solid"
             onChange={({ target: { value } }) =>

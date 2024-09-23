@@ -1,8 +1,11 @@
+import { useContext } from "react";
+import { LogOut } from "../assets/icons/LogOut";
 import { Plus } from "../assets/icons/Plus";
 import { Button } from "../components/elements/Button";
 import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { ProductItem } from "../components/ProductItem";
+import { DataProvider } from "../context/DataContextProvider";
 
 export const Admin = () => {
   const products = [
@@ -56,10 +59,16 @@ export const Admin = () => {
         "https://i.pinimg.com/564x/ee/8f/fa/ee8ffa1b14212ff6676bbd414fffa468.jpg",
     },
   ];
+  const { logOut } = useContext(DataProvider);
   return (
     <Layout>
       <Header>
-        <h3 className="font-bold text-white text-xl text-center">Admin</h3>
+        <Button
+          onClick={logOut}
+          className="font-bold text-white text-xl text-center hover:text-primaryViolet transition"
+        >
+          <LogOut />
+        </Button>
       </Header>
       <main className="container mx-auto p-4">
         <Button className="mb-6 bg-black hover:bg-gray-800 text-white flex items-center py-1.5 px-3 rounded-lg font-semibold">

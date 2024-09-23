@@ -15,7 +15,28 @@ export class AuthSupabaseRepository {
       }
       return data;
     } catch (error) {
-      console.log("Error to signIn: ", error);
+      console.error("Error to signIn: ", error);
+    }
+  };
+  getUser = async () => {
+    try {
+      const {
+        data: { user },
+      } = await this.supabaseClient.auth.getUser();
+
+      return user;
+    } catch (error) {
+      console.error("Error to getUser: ", error);
+    }
+  };
+  logOut = async () => {
+    try {
+      let { error } = await this.supabaseClient.auth.signOut();
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error("Error to logOut: ", error);
     }
   };
 }

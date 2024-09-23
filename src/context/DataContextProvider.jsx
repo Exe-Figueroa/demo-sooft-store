@@ -1,10 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { AuthService } from "../auth-management/application/auth.service";
+import { AuthSupabaseRepository } from "../auth-management/infraestructure/auth.repository";
+import { supabaseClient } from "../libs/supabaseConnection";
 
 export const DataProvider = createContext();
+
+const authService = new AuthService(new AuthSupabaseRepository(supabaseClient));
 
 export const DataContextProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [seeOrderModal, setSeeOrderModal] = useState(false);
+  const [userSession, setUserSession] = useState(null);
+  const [loadingSession, setLoadingSession] = useState(true);
 
   const cleanOrder = () => {
     setOrder([]);
@@ -45,6 +52,26 @@ export const DataContextProvider = ({ children }) => {
     setSeeOrderModal(shouldBeVisible);
   };
 
+  const getUserSession = async () => {
+    const session = await authService.getUser();
+    if (session) {
+      setUserSession(session);
+    }
+    setLoadingSession(false);
+  };
+  const logOut = async () => {
+    await authService.logOut();
+    setUserSession(null);
+  };
+
+  const newUserSession = async (session) => {
+    setUserSession(session);
+  };
+
+  useEffect(() => {
+    getUserSession();
+  }, []);
+
   const obj = {
     order,
     cleanOrder,
@@ -54,6 +81,11 @@ export const DataContextProvider = ({ children }) => {
     deleteProductById,
     handleSeeOrderModal,
     seeOrderModal,
+    getUserSession,
+    logOut,
+    newUserSession,
+    userSession,
+    loadingSession,
   };
   return <DataProvider.Provider value={obj}>{children}</DataProvider.Provider>;
 };
