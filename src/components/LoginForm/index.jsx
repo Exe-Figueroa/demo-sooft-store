@@ -9,6 +9,7 @@ import { supabaseClient } from "../../libs/supabaseConnection";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { DataProvider } from "../../context/DataContextProvider";
+import { InputWithLabel } from "../InputWithLabel";
 
 const authService = new AuthService(new AuthSupabaseRepository(supabaseClient));
 
@@ -39,42 +40,26 @@ export const LoginForm = () => {
       className="flex flex-col gap-4 items-center shadow-lg p-5 rounded-lg"
       onSubmit={handleSubmit}
     >
-      <label className="flex flex-col gap-2">
-        <p>Email de usuario</p>
-        <div className="flex  gap-2 items-center relative">
-          <User className="absolute left-0 pl-3 flex items-center pointer-events-none size-7" />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email de usuario"
-            autoComplete="off"
-            required
-            value={formData.email ?? ""}
-            className="pl-10 py-2 pr-4 w-full border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out outline-none border border-solid"
-            onChange={({ target: { value } }) =>
-              handleChange({ name: "email", value })
-            }
-          />
-        </div>
-      </label>
-      <label className="flex flex-col gap-2">
-        <p>Contraseña</p>
-        <div className="flex  gap-2 items-center relative">
-          <Lock className="absolute left-0 pl-3 flex items-center pointer-events-none size-7" />
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            autoComplete="off"
-            required
-            value={formData.password ?? ""}
-            className="pl-10 py-2 pr-4 w-full border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out outline-none border border-solid"
-            onChange={({ target: { value } }) =>
-              handleChange({ name: "password", value })
-            }
-          />
-        </div>
-      </label>
+      <InputWithLabel
+        icon={User}
+        labelText="Email de usuario"
+        type="email"
+        required
+        name="email"
+        placeholder="Email de usuario"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <InputWithLabel
+        icon={Lock}
+        labelText="Contraseña"
+        type="password"
+        required
+        name="password"
+        placeholder="Contraseña"
+        value={formData.password}
+        onChange={handleChange}
+      />
       <Button
         disabled={!enabledSubmit}
         className="bg-primaryGreen hover:shadow transition text-white flex items-center py-1.5 px-3 rounded-lg font-semibold w-full justify-center"
