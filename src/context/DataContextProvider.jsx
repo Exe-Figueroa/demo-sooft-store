@@ -10,6 +10,7 @@ const authService = new AuthService(new AuthSupabaseRepository(supabaseClient));
 export const DataContextProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [seeOrderModal, setSeeOrderModal] = useState(false);
+  const [seeProductForm, setSeeProductForm] = useState(false);
   const [userSession, setUserSession] = useState(null);
   const [loadingSession, setLoadingSession] = useState(true);
 
@@ -51,6 +52,9 @@ export const DataContextProvider = ({ children }) => {
   const handleSeeOrderModal = (shouldBeVisible) => {
     setSeeOrderModal(shouldBeVisible);
   };
+  const handleSeeProductForm = (shouldBeVisible) => {
+    setSeeProductForm(shouldBeVisible);
+  };
 
   const getUserSession = async () => {
     const session = await authService.getUser();
@@ -86,6 +90,8 @@ export const DataContextProvider = ({ children }) => {
     newUserSession,
     userSession,
     loadingSession,
+    handleSeeProductForm,
+    seeProductForm,
   };
   return <DataProvider.Provider value={obj}>{children}</DataProvider.Provider>;
 };
