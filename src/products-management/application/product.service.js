@@ -1,4 +1,4 @@
-export class ImageServices {
+export class ProductService {
   constructor(productRepository) {
     this.productRepository = productRepository;
   }

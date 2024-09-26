@@ -6,6 +6,7 @@ import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { ProductItem } from "../components/ProductItem";
 import { DataProvider } from "../context/DataContextProvider";
+import { ProductsForm } from "../components/ProductsForm";
 
 export const Admin = () => {
   const products = [
@@ -59,7 +60,7 @@ export const Admin = () => {
         "https://i.pinimg.com/564x/ee/8f/fa/ee8ffa1b14212ff6676bbd414fffa468.jpg",
     },
   ];
-  const { logOut } = useContext(DataProvider);
+  const { logOut, handleSeeProductForm } = useContext(DataProvider);
   return (
     <Layout>
       <Header>
@@ -70,8 +71,12 @@ export const Admin = () => {
           <LogOut />
         </Button>
       </Header>
+      <ProductsForm />
       <main className="container mx-auto p-4">
-        <Button className="mb-6 bg-black hover:bg-gray-800 text-white flex items-center py-1.5 px-3 rounded-lg font-semibold">
+        <Button
+          className="mb-6 bg-black hover:bg-gray-800 text-white flex items-center py-1.5 px-3 rounded-lg font-semibold"
+          onClick={() => handleSeeProductForm(true)}
+        >
           <Plus className="mr-2 h-4 w-4" /> Añadir Producto
         </Button>
         <div className="space-y-4">
