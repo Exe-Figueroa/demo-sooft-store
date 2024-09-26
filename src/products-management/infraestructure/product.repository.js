@@ -11,9 +11,10 @@ export class ProductSupabaseRepository {
       if (error) {
         throw new Error(error.message);
       }
-      return data;
+      return data[0];
     } catch (error) {
-      console.log("Error into createProduct: ", error);
+      console.error("Error into createProduct: ", error);
+      throw error;
     }
   };
   deleteProduct = async (id) => {
@@ -26,7 +27,8 @@ export class ProductSupabaseRepository {
         throw new Error(error.message);
       }
     } catch (error) {
-      console.log("error into deleteProduct:", error.message);
+      console.error("error into deleteProduct:", error.message);
+      throw error;
     }
   };
   updateProduct = async (id, newProduct) => {
@@ -41,7 +43,8 @@ export class ProductSupabaseRepository {
       }
       return data;
     } catch (error) {
-      console.log("error into deleteProduct:", error.message);
+      console.error("error into deleteProduct:", error.message);
+      throw error;
     }
   };
   getAllProducts = async () => {
@@ -54,7 +57,8 @@ export class ProductSupabaseRepository {
       }
       return products;
     } catch (error) {
-      console.log("error into deleteProduct:", error.message);
+      console.error("error into deleteProduct:", error.message);
+      throw error;
     }
   };
 }

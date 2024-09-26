@@ -17,6 +17,7 @@ export class ImageRepositoryAzure {
       };
     } catch (error) {
       console.error("Error al subir el archivo:", error.message);
+      throw error;
     }
   };
   deleteImage = async (id) => {
@@ -26,6 +27,7 @@ export class ImageRepositoryAzure {
       console.log(`Blob eliminado con éxito: ${id}`, deleteResponse);
     } catch (error) {
       console.error("Error al eliminar el blob:", error.message);
+      throw error;
     }
   };
   updateImage = async (id, newImage) => {
@@ -35,6 +37,7 @@ export class ImageRepositoryAzure {
       return image;
     } catch (error) {
       console.error("Error al subir o sobrescribir el archivo:", error.message);
+      throw error;
     }
   };
 }

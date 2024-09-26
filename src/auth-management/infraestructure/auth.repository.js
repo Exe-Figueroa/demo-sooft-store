@@ -16,6 +16,7 @@ export class AuthSupabaseRepository {
       return data;
     } catch (error) {
       console.error("Error to signIn: ", error);
+      throw error;
     }
   };
   getUser = async () => {
@@ -27,6 +28,7 @@ export class AuthSupabaseRepository {
       return user;
     } catch (error) {
       console.error("Error to getUser: ", error);
+      throw error;
     }
   };
   logOut = async () => {
@@ -37,6 +39,7 @@ export class AuthSupabaseRepository {
       }
     } catch (error) {
       console.error("Error to logOut: ", error);
+      throw error;
     }
   };
 }
