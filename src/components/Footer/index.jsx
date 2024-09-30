@@ -4,7 +4,7 @@ import { WhatsApp } from "../../assets/icons/WhatsApp";
 
 export const Footer = () => {
   return (
-    <footer className="bg-primaryGreen w-full py-4 px-2 flex flex-col items-start justify-center gap-4 md:flex-row">
+    <footer className="bg-primaryGreen w-full py-4 px-2 flex flex-col items-start justify-center gap-4 md:flex-row mt-auto">
       <a href="mailto:SooftStoreMDZ@gmail.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
         <At className="text-white"/>
         SooftStoreMDZ@gmail.com
