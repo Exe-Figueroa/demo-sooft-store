@@ -17,9 +17,9 @@ export const ProductCard = ({ product }) => {
   };
 
   return (
-    <section className="w-full max-w-[350px] mx-auto max-h-[400px] shadow-md rounded-lg flex flex-col items-start justify-between pb-7">
+    <section className="w-full max-w-[350px] mx-auto max-h-[400px] shadow-md rounded-lg flex flex-col items-start justify-between pb-7 overflow-hidden">
       <img
-        src={product.imageUrl}
+        src={product.image_url}
         alt={`Image of ${product.name}`}
         className="w-full object-cover h-[250px]"
       />

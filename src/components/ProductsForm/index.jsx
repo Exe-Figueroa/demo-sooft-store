@@ -1,30 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { useNotification } from "../../hooks/useNotification";
 import { Button } from "../elements/Button";
 import { InputWithLabel } from "../InputWithLabel";
 import { DataProvider } from "../../context/DataContextProvider";
 
-import {
-  azureClient,
-  azureContainerClient,
-} from "../../images-management/infraestructure/azureBlobConnection";
-import { ImageServices } from "../../images-management/application/image.service";
-import { ImageRepositoryAzure } from "../../images-management/infraestructure/image.repository";
-import { ProductService } from "../../products-management/application/product.service";
-import { ProductSupabaseRepository } from "../../products-management/infraestructure/product.repository";
-import { supabaseClient } from "../../libs/supabaseConnection";
-
-const imageService = new ImageServices(
-  new ImageRepositoryAzure(azureClient, azureContainerClient)
-);
-const productService = new ProductService(
-  new ProductSupabaseRepository(supabaseClient)
-);
-
-export const ProductsForm = () => {
-  const [urlPreview, setUrlPreview] = useState("");
+export const ProductsForm = ({
+  productService,
+  imageService,
+  handleReload,
+  initialValues,
+}) => {
+  const [urlPreview, setUrlPreview] = useState(
+    initialValues ? initialValues.image_url : ""
+  );
+  useEffect(() => {
+    setUrlPreview(initialValues ? initialValues.image_url : "");
+  }, [initialValues]);
   const [image, setImage] = useState("");
+  const fileInputRef = useRef(null);
 
   const { seeProductForm, handleSeeProductForm } = useContext(DataProvider);
   const handleUrlPreview = (e) => {
@@ -44,27 +38,51 @@ export const ProductsForm = () => {
 
   const onSubmit = async () => {
     try {
-      const { id, url } = await imageService.createImage(image);
-      
-      const newProduct = await productService.createProduct({
-        ...formData,
-        image_id: id,
-        image_url: url,
-      });
-      console.log({id, url, newProduct});
+      let newProduct;
+      if (initialValues.id) {
+        const productToUpdate = {
+          ...formData,
+        };
+        if (image) {
+          const { id, url } = await imageService.updateImage(
+            initialValues.image_id,
+            image
+          );
+          productToUpdate.image_url = url;
+          productToUpdate.image_id = id;
+        }
+        newProduct = await productService.updateProduct(
+          initialValues.id,
+          productToUpdate
+        );
+      } else {
+        const { id, url } = await imageService.createImage(image);
+        newProduct = await productService.createProduct({
+          ...formData,
+          image_id: id,
+          image_url: url,
+        });
+      }
       return newProduct;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
   const onFinish = () => {
     handleSeeProductForm(false);
+    handleReload();
+    setImage("");
+    setUrlPreview("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const { enabledSubmit, formData, handleChange, handleSubmit } = useForm({
     onNotify: handleNotify,
-    initialValues: {},
+    initialValues,
     onSubmit,
     onFinish,
   });
@@ -77,7 +95,7 @@ export const ProductsForm = () => {
     >
       <form
         onSubmit={handleSubmit}
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white transition flex flex-col gap-2 p-6 rounded-lg ${
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white transition flex flex-col gap-2 p-6 rounded-lg w-full max-w-md ${
           seeProductForm ? "scale-100" : "scale-0"
         }`}
       >
@@ -86,10 +104,11 @@ export const ProductsForm = () => {
         )}
         <input
           type="file"
-          required
+          required={!initialValues.id}
           name="image"
           placeholder="Imagen de producto"
           onChange={handleUrlPreview}
+          ref={fileInputRef}
         />
         <InputWithLabel
           type="text"
