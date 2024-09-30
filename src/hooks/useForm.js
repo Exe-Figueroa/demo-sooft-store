@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const useForm = ({ initialValues, onSubmit, onFinish = null, onNotify }) => {
+export const useForm = ({
+  initialValues,
+  onSubmit,
+  onFinish = null,
+  onNotify,
+}) => {
   const [formData, setFormData] = useState(initialValues);
   const [enabledSubmit, setEnabledSubmit] = useState(true);
 
+  useEffect(() => {
+    setFormData(initialValues || {});
+  }, [initialValues]);
+  
   const handleChange = ({ name, value, files }) => {
     if (name === undefined) return;
 
